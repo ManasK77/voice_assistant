@@ -144,7 +144,7 @@ TTS_VOLUME = 0.9   # 0.0 to 1.0
 TTS_VOICE_INDEX = 0  # 0 = first available voice
 
 # --- Assistant ---
-WAKE_WORD   = "jarvis"   # Optional wake word (set to None to disable)
+WAKE_WORD   = "friday"   # Optional wake word (set to None to disable)
 ASSISTANT_NAME = "VoiceAssist"
 
 # --- API Keys ---
@@ -152,7 +152,7 @@ WEATHER_API_KEY = "YOUR_OPENWEATHERMAP_API_KEY"   # https://openweathermap.org/a
 DEFAULT_CITY    = "Mumbai"   # Fallback city for weather
 
 # --- GUI ---
-GUI_ENABLED = True
+GUI_ENABLED = False
 GUI_WIDTH   = 420
 GUI_HEIGHT  = 580
 GUI_THEME   = "dark"   # "dark" or "light"
@@ -217,8 +217,7 @@ INTENT_MAP = {
     "time":        {"keywords": ["time", "what time", "current time"],              "module": "info",       "action": "get_time"},
     "date":        {"keywords": ["date", "today's date", "what day"],               "module": "info",       "action": "get_date"},
     "weather":     {"keywords": ["weather", "temperature", "forecast", "how hot"],  "module": "info",       "action": "get_weather"},
-    "wikipedia":   {"keywords": ["wikipedia", "who is", "what is", "tell me about"],"module": "info",       "action": "wikipedia_summary"},
-    "search":      {"keywords": ["search", "google", "look up", "search for"],      "module": "info",       "action": "web_search"},
+    "search":      {"keywords": ["search for", "search", "look up", "who is", "what is", "tell me about", "what"], "module": "info", "action": "web_search"},
     "volume_up":   {"keywords": ["volume up", "increase volume", "louder"],         "module": "system",     "action": "volume_up"},
     "volume_down": {"keywords": ["volume down", "decrease volume", "quieter"],      "module": "system",     "action": "volume_down"},
     "mute":        {"keywords": ["mute", "silence", "quiet"],                       "module": "system",     "action": "mute"},
@@ -231,7 +230,7 @@ INTENT_MAP = {
     "delete_file": {"keywords": ["delete file", "remove file"],                     "module": "file",       "action": "delete_file"},
     "list_files":  {"keywords": ["list files", "show files", "what files"],         "module": "file",       "action": "list_files"},
     "create_folder":{"keywords":["create folder","make folder","new folder"],       "module": "file",       "action": "create_folder"},
-    "take_photo":  {"keywords": ["take photo", "capture photo", "take picture", "selfie"], "module": "camera", "action": "capture_photo"},
+    "take_photo":  {"keywords": ["take photo", "take a photo", "capture photo", "capture a photo", "take picture", "take a picture", "selfie"], "module": "camera", "action": "capture_photo"},
     "screenshot":  {"keywords": ["screenshot", "capture screen", "screen capture"], "module": "screenshot", "action": "take_screenshot"},
     "read_screen": {"keywords": ["read screen", "what's on screen", "ocr"],         "module": "screenshot", "action": "read_screen_text"},
     "cpu":         {"keywords": ["cpu", "processor usage", "cpu usage"],            "module": "status",     "action": "cpu_usage"},
@@ -254,7 +253,7 @@ class IntentEngine:
         # Return {"module": ..., "action": ..., "raw_text": text}
         # If no match found, return {"module": "unknown", "action": "unknown", "raw_text": text}
 
-    def extract_arg(self, text: str, keyword: str) -> str:
+    def extract_arg(self, text: str, keywords: list | str) -> str:
         # Strip the matched keyword from text and return remainder
         # Example: "open calculator" with keyword "open" → "calculator"
         # Strip leading/trailing whitespace from result
@@ -607,11 +606,8 @@ def route_command(intent: dict, voice: VoiceIO) -> None:
         if action == "get_time":       response = info_ops.get_time()
         elif action == "get_date":     response = info_ops.get_date()
         elif action == "get_weather":  response = info_ops.get_weather()
-        elif action == "wikipedia_summary":
-            query = intent_engine.extract_arg(raw, ["wikipedia", "who is", "what is", "tell me about"])
-            response = info_ops.wikipedia_summary(query)
         elif action == "web_search":
-            query = intent_engine.extract_arg(raw, ["search", "google", "look up", "search for"])
+            query = intent_engine.extract_arg(raw, ["search for", "search", "look up", "tell me about", "who is", "what is", "what"])
             response = info_ops.web_search(query)
 
     elif module == "system":
@@ -679,12 +675,8 @@ def main():
     voice = VoiceIO()
     engine = IntentEngine()
 
-    # Start GUI in background thread if enabled
-    if config.GUI_ENABLED:
-        from gui.dashboard import Dashboard
-        gui = Dashboard(voice)
-        gui_thread = threading.Thread(target=gui.run, daemon=True)
-        gui_thread.start()
+    # GUI is initialized separately if needed
+    # (Removed from main thread loop)
 
     voice.speak(f"Hello! I am {config.ASSISTANT_NAME}. How can I help you?")
 
@@ -878,10 +870,10 @@ Edit `config.py` before running:
 |---|---|---|
 | `WEATHER_API_KEY` | `"YOUR_KEY"` | OpenWeatherMap free API key |
 | `DEFAULT_CITY` | `"Mumbai"` | Fallback city for weather queries |
-| `WAKE_WORD` | `"jarvis"` | Say this before commands. Set to `None` to disable |
+| `WAKE_WORD` | `"friday"` | Say this before commands. Set to `None` to disable |
 | `SR_LANGUAGE` | `"en-IN"` | Speech recognition language/locale |
 | `TTS_RATE` | `175` | TTS speaking speed (words per minute) |
-| `GUI_ENABLED` | `True` | Show/hide the dashboard window |
+| `GUI_ENABLED` | `False` | Show/hide the dashboard window |
 
 ---
 
@@ -894,7 +886,7 @@ Edit `config.py` before running:
 | "What time is it?" | Speaks current time |
 | "What is today's date?" | Speaks current date |
 | "What's the weather?" | Weather for DEFAULT_CITY |
-| "What is Python?" | Wikipedia 2-sentence summary |
+| "What is Python?" | Opens Google in browser |
 | "Search for climate change" | Opens Google in browser |
 
 ### System Operations
@@ -1012,7 +1004,7 @@ Run through these after initial build:
 - [ ] `python main.py` starts without errors
 - [ ] "What time is it?" → correct time spoken
 - [ ] "What's the weather?" → weather spoken (requires API key) or fallback message
-- [ ] "What is Albert Einstein?" → Wikipedia summary spoken
+- [ ] "What is Albert Einstein?" → Performs a web search
 - [ ] "Volume up" → system volume increases
 - [ ] "Volume down" → system volume decreases
 - [ ] "Open calculator" → calculator app opens
@@ -1043,10 +1035,10 @@ Run through these after initial build:
 # After completing installation:
 python main.py
 
-# Say: "Jarvis, what time is it?"
-# Say: "Jarvis, open calculator"
-# Say: "Jarvis, system status"
-# Say: "Jarvis, stop"
+# Say: "Friday, what time is it?"
+# Say: "Friday, open calculator"
+# Say: "Friday, system status"
+# Say: "Friday, stop"
 ```
 
 ---

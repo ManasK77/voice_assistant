@@ -10608,3 +10608,120 @@ AttributeError: Could not find PyAudio; check installation
 2026-04-07 10:48:58,551 [VoiceAssist] INFO: CMD: "what's the weather" -> info.web_search -> "Searching Google for 's the weather"
 2026-04-07 10:49:26,137 [VoiceAssist.VoiceIO] INFO: Heard: 'facebook'
 2026-04-07 10:49:36,543 [VoiceAssist.VoiceIO] INFO: Speaking: Shutting down.
+2026-04-13 09:42:01,243 [VoiceAssist.VoiceIO] INFO: Speaking: Hello! I am VoiceAssist. How can I help you?
+2026-04-13 09:42:13,612 [VoiceAssist.VoiceIO] INFO: Heard: 'friday open google chrome'
+2026-04-13 09:42:13,613 [VoiceAssist] INFO: Heard: 'open google chrome'
+2026-04-13 09:42:13,613 [VoiceAssist.IntentEngine] INFO: Detected intent: open_app (keyword='open')
+2026-04-13 09:42:13,668 [VoiceAssist.VoiceIO] INFO: Speaking: Opening google chrome
+2026-04-13 09:42:14,055 [VoiceAssist] INFO: CMD: 'open google chrome' -> system.open_app -> 'Opening google chrome'
+2026-04-13 09:42:29,580 [VoiceAssist.VoiceIO] INFO: Heard: 'handsfree mode without any interview'
+2026-04-13 09:42:46,608 [VoiceAssist.VoiceIO] INFO: Heard: 'open cloud on google chrome'
+2026-04-13 09:42:51,450 [VoiceAssist.VoiceIO] INFO: Heard: 'search cloud on google chrome'
+2026-04-13 09:43:05,502 [VoiceAssist.VoiceIO] INFO: Heard: 'what is what'
+2026-04-13 09:43:11,828 [VoiceAssist.VoiceIO] INFO: Heard: 'friday what is cloud'
+2026-04-13 09:43:11,828 [VoiceAssist] INFO: Heard: 'what is cloud'
+2026-04-13 09:43:11,828 [VoiceAssist.IntentEngine] INFO: Detected intent: search (keyword='what is')
+2026-04-13 09:43:11,869 [VoiceAssist.VoiceIO] INFO: Speaking: Searching Google for cloud
+2026-04-13 09:43:12,263 [VoiceAssist] INFO: CMD: 'what is cloud' -> info.web_search -> 'Searching Google for cloud'
+2026-04-13 09:43:18,294 [VoiceAssist.VoiceIO] INFO: Heard: 'proud ho raha hai'
+2026-04-13 09:43:47,413 [VoiceAssist.VoiceIO] INFO: Heard: 'delhi mein kavitri document'
+2026-04-13 09:43:57,095 [VoiceAssist.VoiceIO] INFO: Heard: 'friday open calculator'
+2026-04-13 09:43:57,095 [VoiceAssist] INFO: Heard: 'open calculator'
+2026-04-13 09:43:57,095 [VoiceAssist.IntentEngine] INFO: Detected intent: open_app (keyword='open')
+2026-04-13 09:43:57,124 [VoiceAssist.VoiceIO] INFO: Speaking: Opening calculator
+2026-04-13 09:43:57,533 [VoiceAssist] INFO: CMD: 'open calculator' -> system.open_app -> 'Opening calculator'
+2026-04-13 09:44:13,735 [VoiceAssist.VoiceIO] INFO: Heard: 'friday system status'
+2026-04-13 09:44:13,736 [VoiceAssist] INFO: Heard: 'system status'
+2026-04-13 09:44:13,737 [VoiceAssist.IntentEngine] INFO: Detected intent: system_status (keyword='system status')
+2026-04-13 09:44:14,738 [VoiceAssist.VoiceIO] INFO: Speaking: System status: CPU at 6.0%, RAM at 68.5%, Disk at 68.7%
+2026-04-13 09:44:15,120 [VoiceAssist] INFO: CMD: 'system status' -> status.full_status -> 'System status: CPU at 6.0%, RAM at 68.5%, Disk at 68.7%'
+2026-04-13 09:44:19,035 [VoiceAssist.VoiceIO] INFO: Heard: 'craz'
+2026-04-13 09:44:38,164 [VoiceAssist.VoiceIO] INFO: Speaking: Shutting down.
+2026-04-13 22:36:34,963 [VoiceAssist.IntentEngine] INFO: Detected intent: search (keyword='what')
+2026-04-13 22:37:43,766 [VoiceAssist.IntentEngine] INFO: Detected intent: time (keyword='current time')
+2026-04-13 22:37:43,766 [VoiceAssist.IntentEngine] INFO: Detected intent: open_app (keyword='open')
+2026-04-13 22:37:43,766 [VoiceAssist.IntentEngine] INFO: Detected intent: create_file (keyword='create file')
+2026-04-13 22:37:43,766 [VoiceAssist.IntentEngine] INFO: Detected intent: screenshot (keyword='screenshot')
+2026-04-13 22:37:43,766 [VoiceAssist.IntentEngine] INFO: Detected intent: cpu (keyword='cpu usage')
+2026-04-13 22:37:43,766 [VoiceAssist.IntentEngine] INFO: Detected intent: add_todo (keyword='add task')
+2026-04-13 22:37:43,766 [VoiceAssist.IntentEngine] INFO: Detected intent: stop (keyword='stop')
+2026-04-13 22:39:53,755 [VoiceAssist.VoiceIO] INFO: Speaking: Hello! I am VoiceAssist. How can I help you?
+2026-04-13 22:40:11,356 [VoiceAssist.VoiceIO] INFO: Heard: 'vah to chalu hi nahin'
+2026-04-13 22:40:15,564 [VoiceAssist.VoiceIO] INFO: Speaking: Shutting down.
+2026-04-13 22:40:17,953 [VoiceAssist.VoiceIO] INFO: Speaking: Hello! I am VoiceAssist. How can I help you?
+2026-04-13 22:40:49,633 [VoiceAssist.VoiceIO] INFO: Speaking: Shutting down.
+2026-04-13 22:40:53,722 [VoiceAssist.VoiceIO] INFO: Speaking: Hello! I am VoiceAssist. How can I help you?
+2026-04-13 22:41:13,082 [VoiceAssist.VoiceIO] INFO: Heard: 'friday create a file'
+2026-04-13 22:41:13,082 [VoiceAssist] INFO: Heard: 'create a file'
+2026-04-13 22:41:13,082 [VoiceAssist.IntentEngine] INFO: No intent matched for: 'create a file'
+2026-04-13 22:41:13,082 [VoiceAssist.VoiceIO] INFO: Speaking: I didn't understand that command. Please try again.
+2026-04-13 22:41:13,236 [VoiceAssist] INFO: CMD: 'create a file' -> unknown.unknown -> "I didn't understand that command. Please try again."
+2026-04-13 22:41:29,725 [VoiceAssist.VoiceIO] INFO: Heard: 'file test'
+2026-04-13 22:41:38,761 [VoiceAssist.VoiceIO] INFO: Heard: 'friday create a file test'
+2026-04-13 22:41:38,762 [VoiceAssist] INFO: Heard: 'create a file test'
+2026-04-13 22:41:38,762 [VoiceAssist.IntentEngine] INFO: No intent matched for: 'create a file test'
+2026-04-13 22:41:38,762 [VoiceAssist.VoiceIO] INFO: Speaking: I didn't understand that command. Please try again.
+2026-04-13 22:41:38,924 [VoiceAssist] INFO: CMD: 'create a file test' -> unknown.unknown -> "I didn't understand that command. Please try again."
+2026-04-13 22:41:58,752 [VoiceAssist.VoiceIO] INFO: Heard: 'friday volume up'
+2026-04-13 22:41:58,753 [VoiceAssist] INFO: Heard: 'volume up'
+2026-04-13 22:41:58,753 [VoiceAssist.IntentEngine] INFO: Detected intent: volume_up (keyword='volume up')
+2026-04-13 22:41:58,766 [VoiceAssist.SystemOps] ERROR: Volume up error: 'AudioDevice' object has no attribute 'Activate'
+Traceback (most recent call last):
+  File "C:\Users\Manas\Desktop\voice\core\system_ops.py", line 43, in volume_up
+    volume = _get_volume_interface()
+  File "C:\Users\Manas\Desktop\voice\core\system_ops.py", line 35, in _get_volume_interface
+    interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+                ^^^^^^^^^^^^^^^^
+AttributeError: 'AudioDevice' object has no attribute 'Activate'
+2026-04-13 22:41:58,769 [VoiceAssist.VoiceIO] INFO: Speaking: Could not increase volume
+2026-04-13 22:41:58,919 [VoiceAssist] INFO: CMD: 'volume up' -> system.volume_up -> 'Could not increase volume'
+2026-04-13 22:42:16,406 [VoiceAssist.VoiceIO] INFO: Heard: 'friday open google chrome'
+2026-04-13 22:42:16,406 [VoiceAssist] INFO: Heard: 'open google chrome'
+2026-04-13 22:42:16,407 [VoiceAssist.IntentEngine] INFO: Detected intent: open_app (keyword='open')
+2026-04-13 22:42:16,490 [VoiceAssist.VoiceIO] INFO: Speaking: Opening google chrome
+2026-04-13 22:42:16,671 [VoiceAssist] INFO: CMD: 'open google chrome' -> system.open_app -> 'Opening google chrome'
+2026-04-13 22:42:26,847 [VoiceAssist.VoiceIO] INFO: Heard: 'headache take a screenshot'
+2026-04-13 22:42:33,129 [VoiceAssist.VoiceIO] INFO: Heard: 'friday take a screenshot'
+2026-04-13 22:42:33,129 [VoiceAssist] INFO: Heard: 'take a screenshot'
+2026-04-13 22:42:33,129 [VoiceAssist.IntentEngine] INFO: Detected intent: screenshot (keyword='screenshot')
+2026-04-13 22:42:33,233 [VoiceAssist.VoiceIO] INFO: Speaking: Screenshot saved as screenshot_20260413_224233.png
+2026-04-13 22:42:33,393 [VoiceAssist] INFO: CMD: 'take a screenshot' -> screenshot.take_screenshot -> 'Screenshot saved as screenshot_20260413_224233.png'
+2026-04-13 22:42:41,714 [VoiceAssist.VoiceIO] INFO: Heard: 'aur kya kya bol'
+2026-04-13 22:42:57,600 [VoiceAssist.VoiceIO] INFO: Heard: 'friday open calculator'
+2026-04-13 22:42:57,601 [VoiceAssist] INFO: Heard: 'open calculator'
+2026-04-13 22:42:57,601 [VoiceAssist.IntentEngine] INFO: Detected intent: open_app (keyword='open')
+2026-04-13 22:42:57,642 [VoiceAssist.VoiceIO] INFO: Speaking: Opening calculator
+2026-04-13 22:42:57,805 [VoiceAssist] INFO: CMD: 'open calculator' -> system.open_app -> 'Opening calculator'
+2026-04-13 22:43:02,229 [VoiceAssist.VoiceIO] INFO: Heard: 'friday close calculator'
+2026-04-13 22:43:02,229 [VoiceAssist] INFO: Heard: 'close calculator'
+2026-04-13 22:43:02,229 [VoiceAssist.IntentEngine] INFO: Detected intent: close_app (keyword='close')
+2026-04-13 22:43:02,243 [VoiceAssist.VoiceIO] INFO: Speaking: Closed calculator
+2026-04-13 22:43:02,403 [VoiceAssist] INFO: CMD: 'close calculator' -> system.close_app -> 'Closed calculator'
+2026-04-13 22:43:18,739 [VoiceAssist.VoiceIO] INFO: Heard: 'friday create a file called test'
+2026-04-13 22:43:18,739 [VoiceAssist] INFO: Heard: 'create a file called test'
+2026-04-13 22:43:18,739 [VoiceAssist.IntentEngine] INFO: No intent matched for: 'create a file called test'
+2026-04-13 22:43:18,739 [VoiceAssist.VoiceIO] INFO: Speaking: I didn't understand that command. Please try again.
+2026-04-13 22:43:18,897 [VoiceAssist] INFO: CMD: 'create a file called test' -> unknown.unknown -> "I didn't understand that command. Please try again."
+2026-04-13 22:43:53,765 [VoiceAssist.VoiceIO] INFO: Heard: 'friday create file test'
+2026-04-13 22:43:53,765 [VoiceAssist] INFO: Heard: 'create file test'
+2026-04-13 22:43:53,765 [VoiceAssist.IntentEngine] INFO: Detected intent: create_file (keyword='create file')
+2026-04-13 22:43:53,766 [VoiceAssist.VoiceIO] INFO: Speaking: File test.txt created at C:\Users\Manas\test.txt
+2026-04-13 22:43:53,872 [VoiceAssist] INFO: CMD: 'create file test' -> file.create_file -> 'File test.txt created at C:\\Users\\Manas\\test.txt'
+2026-04-13 22:44:35,352 [VoiceAssist.VoiceIO] INFO: Heard: 'search albert einstein'
+2026-04-13 22:44:45,918 [VoiceAssist.VoiceIO] INFO: Heard: 'only bahut se kiya tha'
+2026-04-13 22:45:01,102 [VoiceAssist.VoiceIO] INFO: Heard: 'friday what is albert'
+2026-04-13 22:45:01,102 [VoiceAssist] INFO: Heard: 'what is albert'
+2026-04-13 22:45:01,103 [VoiceAssist.IntentEngine] INFO: Detected intent: search (keyword='what is')
+2026-04-13 22:45:01,141 [VoiceAssist.VoiceIO] INFO: Speaking: Searching Google for albert
+2026-04-13 22:45:01,306 [VoiceAssist] INFO: CMD: 'what is albert' -> info.web_search -> 'Searching Google for albert'
+2026-04-13 22:45:11,233 [VoiceAssist.VoiceIO] INFO: Heard: 'friday who is alber'
+2026-04-13 22:45:11,233 [VoiceAssist] INFO: Heard: 'who is alber'
+2026-04-13 22:45:11,233 [VoiceAssist.IntentEngine] INFO: Detected intent: search (keyword='who is')
+2026-04-13 22:45:11,243 [VoiceAssist.VoiceIO] INFO: Speaking: Searching Google for alber
+2026-04-13 22:45:11,399 [VoiceAssist] INFO: CMD: 'who is alber' -> info.web_search -> 'Searching Google for alber'
+2026-04-13 22:45:27,958 [VoiceAssist.VoiceIO] INFO: Heard: 'friday who is albert'
+2026-04-13 22:45:27,958 [VoiceAssist] INFO: Heard: 'who is albert'
+2026-04-13 22:45:27,958 [VoiceAssist.IntentEngine] INFO: Detected intent: search (keyword='who is')
+2026-04-13 22:45:27,971 [VoiceAssist.VoiceIO] INFO: Speaking: Searching Google for albert
+2026-04-13 22:45:28,135 [VoiceAssist] INFO: CMD: 'who is albert' -> info.web_search -> 'Searching Google for albert'
+2026-04-13 22:45:35,217 [VoiceAssist.VoiceIO] INFO: Heard: 'west bengal board einstein for some'

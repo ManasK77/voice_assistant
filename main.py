@@ -2,11 +2,17 @@
 """
 VoiceAssist — Main Entry Point
 
-Starts the continuous voice listening loop and optionally launches the GUI.
+Starts the voice interface, GUI interface, or both.
+Usage:
+    python main.py              # Voice mode (default)
+    python main.py --mode gui   # GUI mode
+    python main.py --mode both  # Both simultaneously
 """
 
+import argparse
 import logging
 import sys
+import threading
 from logging.handlers import RotatingFileHandler
 
 import config
@@ -147,9 +153,9 @@ def route_command(intent: dict, voice: VoiceIO) -> None:
         voice.speak("Something went wrong. Please try again.")
 
 
-# --- Main Loop ---
-def main():
-    voice = VoiceIO()
+# --- Voice Loop ---
+def voice_loop(voice: VoiceIO):
+    """Continuous voice listening loop."""
     voice.speak(f"Hello! I am {config.ASSISTANT_NAME}. How can I help you?")
 
     while True:
@@ -182,6 +188,63 @@ def main():
             voice.speak("Something went wrong. Please try again.")
 
 
+# --- CLI Argument Parsing ---
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="VoiceAssist — Voice Assistant System",
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
+    parser.add_argument(
+        "--mode",
+        choices=["voice", "gui", "both"],
+        default="voice",
+        help=(
+            "Interface mode:\n"
+            "  voice  — Voice-only interface (default)\n"
+            "  gui    — GUI-only interface\n"
+            "  both   — GUI + voice running simultaneously"
+        ),
+    )
+    return parser.parse_args()
+
+
+# --- Main Entry Point ---
+def main():
+    args = parse_args()
+
+    if args.mode == "voice":
+        # Original voice-only mode
+        voice = VoiceIO()
+        voice_loop(voice)
+
+    elif args.mode == "gui":
+        # GUI-only mode — no microphone needed
+        from interfaces.gui_interface import GUIInterface
+        gui = GUIInterface()
+        gui.run()
+
+    elif args.mode == "both":
+        # GUI on main thread + voice loop on background thread
+        from interfaces.gui_interface import GUIInterface
+
+        voice = VoiceIO()
+        gui = GUIInterface()
+
+        # Wire voice events to GUI log
+        original_speak = voice.speak
+
+        def speak_with_gui(text):
+            original_speak(text)
+            gui.log_external(f"[ASSISTANT] {text}", "info")
+
+        voice.speak = speak_with_gui
+
+        # Start voice loop in background
+        voice_thread = threading.Thread(target=voice_loop, args=(voice,), daemon=True)
+        voice_thread.start()
+
+        gui.run()
+
+
 if __name__ == "__main__":
     main()
-

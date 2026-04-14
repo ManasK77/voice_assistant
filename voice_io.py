@@ -15,18 +15,26 @@ logger = logging.getLogger("VoiceAssist.VoiceIO")
 
 class VoiceIO:
     def __init__(self):
-        # Initialize TTS engine
-        self.engine = pyttsx3.init()
-        self.engine.setProperty("rate", config.TTS_RATE)
-        self.engine.setProperty("volume", config.TTS_VOLUME)
-        voices = self.engine.getProperty("voices")
-        if voices and config.TTS_VOICE_INDEX < len(voices):
-            self.engine.setProperty("voice", voices[config.TTS_VOICE_INDEX].id)
-
         # Initialize speech recognizer
         self.recognizer = sr.Recognizer()
         self.recognizer.energy_threshold = config.SR_ENERGY_THRESHOLD
         self.recognizer.pause_threshold = config.SR_PAUSE_THRESHOLD
+
+    def _create_engine(self):
+        """Create a fresh pyttsx3 engine instance with configured settings.
+
+        pyttsx3 on Windows (sapi5) has a known issue where runAndWait()
+        can leave the engine loop in a broken state, causing subsequent
+        speak calls to produce no audio. Creating a fresh engine for
+        each call is the standard workaround.
+        """
+        engine = pyttsx3.init()
+        engine.setProperty("rate", config.TTS_RATE)
+        engine.setProperty("volume", config.TTS_VOLUME)
+        voices = engine.getProperty("voices")
+        if voices and config.TTS_VOICE_INDEX < len(voices):
+            engine.setProperty("voice", voices[config.TTS_VOICE_INDEX].id)
+        return engine
 
     def speak(self, text: str) -> None:
         """Speak the given text using TTS and print to console."""
@@ -34,15 +42,20 @@ class VoiceIO:
         logger.info(f"Speaking: {text}")
 
         try:
-            self.engine.say(text)
-            self.engine.runAndWait()
-        except RuntimeError:
-            # Engine may already be running; re-init
-            self.engine = pyttsx3.init()
-            self.engine.setProperty("rate", config.TTS_RATE)
-            self.engine.setProperty("volume", config.TTS_VOLUME)
-            self.engine.say(text)
-            self.engine.runAndWait()
+            engine = self._create_engine()
+            engine.say(text)
+            engine.runAndWait()
+            engine.stop()
+        except Exception as e:
+            logger.warning(f"TTS error: {e}")
+            # Last-resort fallback: try once more with a fresh engine
+            try:
+                engine = pyttsx3.init()
+                engine.say(text)
+                engine.runAndWait()
+                engine.stop()
+            except Exception as e2:
+                logger.error(f"TTS fallback also failed: {e2}")
 
     def listen(self) -> str | None:
         """Listen for a voice command and return the recognized text."""

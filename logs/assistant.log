@@ -11004,3 +11004,161 @@ pytesseract.pytesseract.TesseractNotFoundError: tesseract is not installed or it
 2026-04-14 20:57:09,512 [VoiceAssist.VoiceIO] INFO: Speaking: The answer is 100
 2026-04-14 20:57:09,641 [VoiceAssist] INFO: CMD: 'calculate 10 x 10' -> productivity.calculate -> 'The answer is 100'
 2026-04-14 20:57:26,912 [VoiceAssist.VoiceIO] INFO: Speaking: Shutting down.
+2026-04-14 21:04:18,513 [VoiceAssist.VoiceIO] INFO: Speaking: Hello! I am VoiceAssist. How can I help you?
+2026-04-14 21:04:28,317 [VoiceAssist.VoiceIO] INFO: Heard: 'friday cpu'
+2026-04-14 21:04:28,318 [VoiceAssist] INFO: Heard: 'cpu'
+2026-04-14 21:04:28,319 [VoiceAssist.IntentEngine] INFO: Detected intent: cpu (keyword='cpu')
+2026-04-14 21:04:29,320 [VoiceAssist.VoiceIO] INFO: Speaking: CPU usage is 5.5%
+2026-04-14 21:04:32,647 [VoiceAssist] INFO: CMD: 'cpu' -> status.cpu_usage -> 'CPU usage is 5.5%'
+2026-04-14 21:04:42,469 [VoiceAssist.VoiceIO] INFO: Heard: 'friday show my tas'
+2026-04-14 21:04:42,471 [VoiceAssist] INFO: Heard: 'show my tas'
+2026-04-14 21:04:42,472 [VoiceAssist.IntentEngine] INFO: No intent matched for: 'show my tas'
+2026-04-14 21:04:42,472 [VoiceAssist.VoiceIO] INFO: Speaking: I didn't understand that command. Please try again.
+2026-04-14 21:04:46,705 [VoiceAssist] INFO: CMD: 'show my tas' -> unknown.unknown -> "I didn't understand that command. Please try again."
+2026-04-14 21:04:49,965 [VoiceAssist.VoiceIO] INFO: Heard: 'zomato'
+2026-04-14 21:04:57,337 [VoiceAssist.VoiceIO] INFO: Heard: 'friday show my task'
+2026-04-14 21:04:57,339 [VoiceAssist] INFO: Heard: 'show my task'
+2026-04-14 21:04:57,339 [VoiceAssist.IntentEngine] INFO: Detected intent: show_todos (keyword='show my task')
+2026-04-14 21:04:57,340 [VoiceAssist.VoiceIO] INFO: Speaking: You have 2 tasks: 1. finish report, 2. study
+2026-04-14 21:05:01,523 [VoiceAssist] INFO: CMD: 'show my task' -> productivity.show_todos -> 'You have 2 tasks: 1. finish report, 2. study'
+2026-04-14 21:05:11,871 [VoiceAssist.VoiceIO] INFO: Heard: 'friday clear all tas'
+2026-04-14 21:05:11,872 [VoiceAssist] INFO: Heard: 'clear all tas'
+2026-04-14 21:05:11,874 [VoiceAssist.IntentEngine] INFO: No intent matched for: 'clear all tas'
+2026-04-14 21:05:11,874 [VoiceAssist.VoiceIO] INFO: Speaking: I didn't understand that command. Please try again.
+2026-04-14 21:05:16,108 [VoiceAssist] INFO: CMD: 'clear all tas' -> unknown.unknown -> "I didn't understand that command. Please try again."
+2026-04-14 21:05:25,172 [VoiceAssist.VoiceIO] INFO: Heard: 'neural toss'
+2026-04-14 21:05:36,900 [VoiceAssist.VoiceIO] INFO: Heard: 'friday near all to'
+2026-04-14 21:05:36,900 [VoiceAssist] INFO: Heard: 'near all to'
+2026-04-14 21:05:36,901 [VoiceAssist.IntentEngine] INFO: No intent matched for: 'near all to'
+2026-04-14 21:05:36,901 [VoiceAssist.VoiceIO] INFO: Speaking: I didn't understand that command. Please try again.
+2026-04-14 21:05:41,132 [VoiceAssist] INFO: CMD: 'near all to' -> unknown.unknown -> "I didn't understand that command. Please try again."
+2026-04-14 21:05:44,847 [VoiceAssist.VoiceIO] INFO: Heard: 'clear all tas'
+2026-04-14 21:05:58,805 [VoiceAssist.VoiceIO] INFO: Heard: 'friday clear all tas'
+2026-04-14 21:05:58,805 [VoiceAssist] INFO: Heard: 'clear all tas'
+2026-04-14 21:05:58,807 [VoiceAssist.IntentEngine] INFO: No intent matched for: 'clear all tas'
+2026-04-14 21:05:58,807 [VoiceAssist.VoiceIO] INFO: Speaking: I didn't understand that command. Please try again.
+2026-04-14 21:06:03,040 [VoiceAssist] INFO: CMD: 'clear all tas' -> unknown.unknown -> "I didn't understand that command. Please try again."
+2026-04-14 21:06:07,616 [VoiceAssist.VoiceIO] INFO: Heard: 'clear all task'
+2026-04-14 21:06:18,995 [VoiceAssist.VoiceIO] INFO: Heard: 'friday near all task'
+2026-04-14 21:06:18,996 [VoiceAssist] INFO: Heard: 'near all task'
+2026-04-14 21:06:18,996 [VoiceAssist.IntentEngine] INFO: No intent matched for: 'near all task'
+2026-04-14 21:06:18,998 [VoiceAssist.VoiceIO] INFO: Speaking: I didn't understand that command. Please try again.
+2026-04-14 21:06:23,231 [VoiceAssist] INFO: CMD: 'near all task' -> unknown.unknown -> "I didn't understand that command. Please try again."
+2026-04-14 21:06:28,936 [VoiceAssist.VoiceIO] INFO: Heard: 'friday clear all tas'
+2026-04-14 21:06:28,937 [VoiceAssist] INFO: Heard: 'clear all tas'
+2026-04-14 21:06:28,938 [VoiceAssist.IntentEngine] INFO: No intent matched for: 'clear all tas'
+2026-04-14 21:06:28,938 [VoiceAssist.VoiceIO] INFO: Speaking: I didn't understand that command. Please try again.
+2026-04-14 21:06:33,171 [VoiceAssist] INFO: CMD: 'clear all tas' -> unknown.unknown -> "I didn't understand that command. Please try again."
+2026-04-14 21:06:41,007 [VoiceAssist.VoiceIO] INFO: Heard: 'friday clear all task'
+2026-04-14 21:06:41,007 [VoiceAssist] INFO: Heard: 'clear all task'
+2026-04-14 21:06:41,008 [VoiceAssist.IntentEngine] INFO: No intent matched for: 'clear all task'
+2026-04-14 21:06:41,009 [VoiceAssist.VoiceIO] INFO: Speaking: I didn't understand that command. Please try again.
+2026-04-14 21:06:45,340 [VoiceAssist] INFO: CMD: 'clear all task' -> unknown.unknown -> "I didn't understand that command. Please try again."
+2026-04-14 21:06:50,841 [VoiceAssist.VoiceIO] INFO: Heard: 'friday calculate 10 times'
+2026-04-14 21:06:50,842 [VoiceAssist] INFO: Heard: 'calculate 10 times'
+2026-04-14 21:06:50,844 [VoiceAssist.IntentEngine] INFO: Detected intent: calculate (keyword='calculate')
+2026-04-14 21:06:50,845 [VoiceAssist.Productivity] WARNING: Calculate error: invalid syntax (<string>, line 1)
+2026-04-14 21:06:50,845 [VoiceAssist.VoiceIO] INFO: Speaking: Could not calculate that. Please try rephrasing.
+2026-04-14 21:06:55,025 [VoiceAssist] INFO: CMD: 'calculate 10 times' -> productivity.calculate -> 'Could not calculate that. Please try rephrasing.'
+2026-04-14 21:07:00,860 [VoiceAssist.VoiceIO] INFO: Heard: 'friday calculate 10 times 10'
+2026-04-14 21:07:00,862 [VoiceAssist] INFO: Heard: 'calculate 10 times 10'
+2026-04-14 21:07:00,863 [VoiceAssist.IntentEngine] INFO: Detected intent: calculate (keyword='calculate')
+2026-04-14 21:07:00,863 [VoiceAssist.VoiceIO] INFO: Speaking: The answer is 100
+2026-04-14 21:07:03,132 [VoiceAssist] INFO: CMD: 'calculate 10 times 10' -> productivity.calculate -> 'The answer is 100'
+2026-04-14 21:07:12,335 [VoiceAssist.VoiceIO] INFO: Heard: 'friday remind me in 10 seconds to stretch'
+2026-04-14 21:07:12,336 [VoiceAssist] INFO: Heard: 'remind me in 10 seconds to stretch'
+2026-04-14 21:07:12,336 [VoiceAssist.IntentEngine] INFO: Detected intent: set_reminder (keyword='remind me')
+2026-04-14 21:07:12,338 [VoiceAssist.VoiceIO] INFO: Speaking: Done. Reminder set successfully for 1 minute: in 10 seconds to stretch
+2026-04-14 21:07:18,185 [VoiceAssist] INFO: CMD: 'remind me in 10 seconds to stretch' -> productivity.set_reminder -> 'Done. Reminder set successfully for 1 minute: in 10 seconds to stretch'
+2026-04-14 21:07:34,696 [VoiceAssist.VoiceIO] INFO: Heard: 'friday'
+2026-04-14 21:07:34,698 [VoiceAssist] INFO: Heard: ''
+2026-04-14 21:07:34,699 [VoiceAssist.IntentEngine] INFO: No intent matched for: ''
+2026-04-14 21:07:34,699 [VoiceAssist.VoiceIO] INFO: Speaking: I didn't understand that command. Please try again.
+2026-04-14 21:07:39,035 [VoiceAssist] INFO: CMD: '' -> unknown.unknown -> "I didn't understand that command. Please try again."
+2026-04-14 21:07:41,829 [VoiceAssist.VoiceIO] INFO: Heard: "what's the weather"
+2026-04-14 21:07:50,892 [VoiceAssist.VoiceIO] INFO: Heard: "what's the weather"
+2026-04-14 21:07:56,778 [VoiceAssist.VoiceIO] INFO: Heard: "friday what's the weather"
+2026-04-14 21:07:56,779 [VoiceAssist] INFO: Heard: "what's the weather"
+2026-04-14 21:07:56,779 [VoiceAssist.IntentEngine] INFO: Detected intent: weather (keyword='weather')
+2026-04-14 21:07:56,807 [VoiceAssist.VoiceIO] INFO: Speaking: The weather in Mumbai is smoke with a temperature of 30.99°C
+2026-04-14 21:08:01,899 [VoiceAssist] INFO: CMD: "what's the weather" -> info.get_weather -> 'The weather in Mumbai is smoke with a temperature of 30.99°C'
+2026-04-14 21:08:06,596 [VoiceAssist.VoiceIO] INFO: Heard: 'friday what is val'
+2026-04-14 21:08:06,598 [VoiceAssist] INFO: Heard: 'what is val'
+2026-04-14 21:08:06,598 [VoiceAssist.IntentEngine] INFO: Detected intent: search (keyword='what is')
+2026-04-14 21:08:06,793 [VoiceAssist.VoiceIO] INFO: Speaking: Done. Searching Google for val successfully.
+2026-04-14 21:08:10,735 [VoiceAssist] INFO: CMD: 'what is val' -> info.web_search -> 'Done. Searching Google for val successfully.'
+2026-04-14 21:08:12,351 [VoiceAssist.VoiceIO] INFO: Speaking: Reminder: in 10 seconds to stretch
+2026-04-14 21:08:24,555 [VoiceAssist.VoiceIO] INFO: Heard: 'friday read screen'
+2026-04-14 21:08:24,555 [VoiceAssist] INFO: Heard: 'read screen'
+2026-04-14 21:08:24,557 [VoiceAssist.IntentEngine] INFO: Detected intent: read_screen (keyword='read screen')
+2026-04-14 21:08:24,723 [VoiceAssist.ScreenshotOps] ERROR: OCR error: tesseract is not installed or it's not in your PATH. See README file for more information.
+Traceback (most recent call last):
+  File "C:\Users\joelj\AppData\Local\Programs\Python\Python311\Lib\site-packages\pytesseract\pytesseract.py", line 275, in run_tesseract
+    proc = subprocess.Popen(cmd_args, **subprocess_args())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\joelj\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "C:\Users\joelj\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1538, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\joelj\OneDrive\Desktop\HCI Proj\voice_assistant\core\screenshot_ops.py", line 48, in read_screen_text
+    text = pytesseract.image_to_string(screenshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\joelj\AppData\Local\Programs\Python\Python311\Lib\site-packages\pytesseract\pytesseract.py", line 486, in image_to_string
+    return {
+           ^
+  File "C:\Users\joelj\AppData\Local\Programs\Python\Python311\Lib\site-packages\pytesseract\pytesseract.py", line 489, in <lambda>
+    Output.STRING: lambda: run_and_get_output(*args),
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\joelj\AppData\Local\Programs\Python\Python311\Lib\site-packages\pytesseract\pytesseract.py", line 352, in run_and_get_output
+    run_tesseract(**kwargs)
+  File "C:\Users\joelj\AppData\Local\Programs\Python\Python311\Lib\site-packages\pytesseract\pytesseract.py", line 280, in run_tesseract
+    raise TesseractNotFoundError()
+pytesseract.pytesseract.TesseractNotFoundError: tesseract is not installed or it's not in your PATH. See README file for more information.
+2026-04-14 21:08:24,728 [VoiceAssist.VoiceIO] INFO: Speaking: Sorry, could not read text from the screen. Make sure Tesseract OCR is installed
+2026-04-14 21:08:31,126 [VoiceAssist] INFO: CMD: 'read screen' -> screenshot.read_screen_text -> 'Sorry, could not read text from the screen. Make sure Tesseract OCR is installed'
+2026-04-14 21:08:45,137 [VoiceAssist.VoiceIO] INFO: Heard: 'friday open calculator'
+2026-04-14 21:08:45,137 [VoiceAssist] INFO: Heard: 'open calculator'
+2026-04-14 21:08:45,139 [VoiceAssist.IntentEngine] INFO: Detected intent: open_app (keyword='open')
+2026-04-14 21:08:45,194 [VoiceAssist.VoiceIO] INFO: Speaking: Done. calculator has been opened successfully.
+2026-04-14 21:08:49,305 [VoiceAssist] INFO: CMD: 'open calculator' -> system.open_app -> 'Done. calculator has been opened successfully.'
+2026-04-14 21:08:52,264 [VoiceAssist.VoiceIO] INFO: Heard: 'open term'
+2026-04-14 21:08:57,457 [VoiceAssist.VoiceIO] INFO: Heard: 'friday open term'
+2026-04-14 21:08:57,458 [VoiceAssist] INFO: Heard: 'open term'
+2026-04-14 21:08:57,458 [VoiceAssist.IntentEngine] INFO: Detected intent: open_app (keyword='open')
+2026-04-14 21:08:57,486 [VoiceAssist.VoiceIO] INFO: Speaking: Done. term has been opened successfully.
+2026-04-14 21:09:01,171 [VoiceAssist] INFO: CMD: 'open term' -> system.open_app -> 'Done. term has been opened successfully.'
+2026-04-14 21:09:04,746 [VoiceAssist.VoiceIO] INFO: Heard: 'friday close'
+2026-04-14 21:09:04,747 [VoiceAssist] INFO: Heard: 'close'
+2026-04-14 21:09:04,748 [VoiceAssist.IntentEngine] INFO: Detected intent: close_app (keyword='close')
+2026-04-14 21:09:04,786 [VoiceAssist.VoiceIO] INFO: Speaking: No running process found for close
+2026-04-14 21:09:07,607 [VoiceAssist] INFO: CMD: 'close' -> system.close_app -> 'No running process found for close'
+2026-04-14 21:09:17,141 [VoiceAssist.VoiceIO] INFO: Heard: 'friday close calculator'
+2026-04-14 21:09:17,142 [VoiceAssist] INFO: Heard: 'close calculator'
+2026-04-14 21:09:17,143 [VoiceAssist.IntentEngine] INFO: Detected intent: close_app (keyword='close')
+2026-04-14 21:09:17,146 [VoiceAssist.VoiceIO] INFO: Speaking: Done. calculator has been closed successfully.
+2026-04-14 21:09:21,304 [VoiceAssist] INFO: CMD: 'close calculator' -> system.close_app -> 'Done. calculator has been closed successfully.'
+2026-04-14 21:09:25,763 [VoiceAssist.VoiceIO] INFO: Heard: 'friday close term'
+2026-04-14 21:09:25,764 [VoiceAssist] INFO: Heard: 'close term'
+2026-04-14 21:09:25,764 [VoiceAssist.IntentEngine] INFO: Detected intent: close_app (keyword='close')
+2026-04-14 21:09:25,768 [VoiceAssist.VoiceIO] INFO: Speaking: Done. term has been closed successfully.
+2026-04-14 21:09:29,560 [VoiceAssist] INFO: CMD: 'close term' -> system.close_app -> 'Done. term has been closed successfully.'
+2026-04-14 21:09:39,606 [VoiceAssist.VoiceIO] INFO: Heard: 'friday volume up'
+2026-04-14 21:09:39,607 [VoiceAssist] INFO: Heard: 'volume up'
+2026-04-14 21:09:39,608 [VoiceAssist.IntentEngine] INFO: Detected intent: volume_up (keyword='volume up')
+2026-04-14 21:09:39,639 [VoiceAssist.VoiceIO] INFO: Speaking: Done. Volume has been increased successfully.
+2026-04-14 21:09:43,621 [VoiceAssist] INFO: CMD: 'volume up' -> system.volume_up -> 'Done. Volume has been increased successfully.'
+2026-04-14 21:09:49,359 [VoiceAssist.VoiceIO] INFO: Heard: 'friday what time is it'
+2026-04-14 21:09:49,360 [VoiceAssist] INFO: Heard: 'what time is it'
+2026-04-14 21:09:49,362 [VoiceAssist.IntentEngine] INFO: Detected intent: time (keyword='what time')
+2026-04-14 21:09:49,362 [VoiceAssist.VoiceIO] INFO: Speaking: The current time is 09:09 PM
+2026-04-14 21:09:52,390 [VoiceAssist] INFO: CMD: 'what time is it' -> info.get_time -> 'The current time is 09:09 PM'
+2026-04-14 21:10:03,562 [VoiceAssist.VoiceIO] INFO: Heard: 'friday stop'
+2026-04-14 21:10:03,563 [VoiceAssist] INFO: Heard: 'stop'
+2026-04-14 21:10:03,563 [VoiceAssist.IntentEngine] INFO: Detected intent: stop (keyword='stop')
+2026-04-14 21:10:03,564 [VoiceAssist.VoiceIO] INFO: Speaking: Goodbye!

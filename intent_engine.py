@@ -9,10 +9,10 @@ logger = logging.getLogger("VoiceAssist.IntentEngine")
 
 # Structure: each entry maps to a module and action
 INTENT_MAP = {
-    "time":           {"keywords": ["time", "what time", "current time"],                        "module": "info",        "action": "get_time"},
+    "time":           {"keywords": ["what time", "current time", "time"],                        "module": "info",        "action": "get_time"},
     "date":           {"keywords": ["date", "today's date", "what day"],                         "module": "info",        "action": "get_date"},
     "weather":        {"keywords": ["weather", "temperature", "forecast", "how hot"],            "module": "info",        "action": "get_weather"},
-    "search":         {"keywords": ["search for", "search", "look up", "who is", "what is", "tell me about", "what"],  "module": "info",  "action": "web_search"},
+    "search":         {"keywords": ["search for", "search", "look up", "who is", "what is", "tell me about"],  "module": "info",  "action": "web_search"},
     "volume_up":      {"keywords": ["volume up", "increase volume", "louder"],                   "module": "system",      "action": "volume_up"},
     "volume_down":    {"keywords": ["volume down", "decrease volume", "quieter"],                "module": "system",      "action": "volume_down"},
     "mute":           {"keywords": ["mute", "silence", "quiet"],                                 "module": "system",      "action": "mute"},
@@ -26,8 +26,8 @@ INTENT_MAP = {
     "list_files":     {"keywords": ["list files", "show files", "what files"],                   "module": "file",        "action": "list_files"},
     "create_folder":  {"keywords": ["create folder", "make folder", "new folder"],               "module": "file",        "action": "create_folder"},
     "take_photo":     {"keywords": ["take photo", "take a photo", "capture photo", "capture a photo", "take picture", "take a picture", "selfie"],    "module": "camera",      "action": "capture_photo"},
-    "screenshot":     {"keywords": ["screenshot", "capture screen", "screen capture"],           "module": "screenshot",  "action": "take_screenshot"},
-    "read_screen":    {"keywords": ["read screen", "what's on screen", "ocr"],                   "module": "screenshot",  "action": "read_screen_text"},
+    "screenshot":     {"keywords": ["screenshot", "capture screen", "screen capture", "take a screenshot"],  "module": "screenshot",  "action": "take_screenshot"},
+    "read_screen":    {"keywords": ["read the screen", "read screen", "what's on screen", "what's on the screen", "screen text", "ocr"],  "module": "screenshot",  "action": "read_screen_text"},
     "cpu":            {"keywords": ["cpu", "processor usage", "cpu usage"],                      "module": "status",      "action": "cpu_usage"},
     "ram":            {"keywords": ["ram", "memory usage", "ram usage"],                         "module": "status",      "action": "ram_usage"},
     "disk":           {"keywords": ["disk", "storage", "disk usage"],                            "module": "status",      "action": "disk_usage"},
@@ -35,11 +35,24 @@ INTENT_MAP = {
     "task_manager":   {"keywords": ["task manager", "open task manager"],                        "module": "status",      "action": "open_task_manager"},
     "calculate":      {"keywords": ["calculate", "compute", "evaluate"],                         "module": "productivity","action": "calculate"},
     "add_todo":       {"keywords": ["add task", "add to-do", "remember to", "add todo"],         "module": "productivity","action": "add_todo"},
-    "show_todos":     {"keywords": ["show tasks", "my tasks", "to-do list", "what are my tasks"],"module": "productivity","action": "show_todos"},
+    "show_todos":     {"keywords": ["show tasks", "show my task", "my tasks", "my task", "to-do list", "what are my tasks"],"module": "productivity","action": "show_todos"},
     "clear_todos":    {"keywords": ["clear tasks", "delete all tasks"],                          "module": "productivity","action": "clear_todos"},
     "set_reminder":   {"keywords": ["remind me", "set reminder", "set an alarm"],                "module": "productivity","action": "set_reminder"},
     "stop":           {"keywords": ["stop", "quit", "goodbye", "exit", "bye"],                   "module": "core",        "action": "stop"},
 }
+
+# Keywords that require word boundary matching to avoid false substring matches
+# e.g. "time" should not match "times" in "calculate 10 times 10"
+import re
+
+def _keyword_matches(keyword, text):
+    """Check if keyword exists in text with word boundary awareness."""
+    # Use word boundary regex for short single-word keywords to prevent
+    # false matches like "time" in "times" or "exit" in "exiting"
+    if " " not in keyword and len(keyword) <= 5:
+        pattern = r'\b' + re.escape(keyword) + r'\b'
+        return bool(re.search(pattern, text))
+    return keyword in text
 
 
 class IntentEngine:
@@ -47,25 +60,31 @@ class IntentEngine:
         """
         Detect intent from text using keyword matching.
         Returns dict with module, action, and raw_text.
+
+        Strategy: collect ALL keyword matches across all intents, then pick
+        the match with the longest keyword. This ensures more specific
+        phrases always win over generic ones.
         """
         text_lower = text.lower()
 
-        # Sort by keyword length descending to match longer/more specific phrases first
-        sorted_intents = sorted(
-            INTENT_MAP.items(),
-            key=lambda item: max(len(kw) for kw in item[1]["keywords"]),
-            reverse=True,
-        )
+        best_match = None
+        best_keyword_len = -1
 
-        for intent_name, intent_data in sorted_intents:
-            for keyword in sorted(intent_data["keywords"], key=len, reverse=True):
-                if keyword in text_lower:
-                    logger.info(f"Detected intent: {intent_name} (keyword={keyword!r})")
-                    return {
-                        "module": intent_data["module"],
-                        "action": intent_data["action"],
-                        "raw_text": text,
-                    }
+        for intent_name, intent_data in INTENT_MAP.items():
+            for keyword in intent_data["keywords"]:
+                if _keyword_matches(keyword, text_lower):
+                    if len(keyword) > best_keyword_len:
+                        best_keyword_len = len(keyword)
+                        best_match = (intent_name, intent_data, keyword)
+
+        if best_match:
+            intent_name, intent_data, keyword = best_match
+            logger.info(f"Detected intent: {intent_name} (keyword={keyword!r})")
+            return {
+                "module": intent_data["module"],
+                "action": intent_data["action"],
+                "raw_text": text,
+            }
 
         logger.info(f"No intent matched for: {text!r}")
         return {"module": "unknown", "action": "unknown", "raw_text": text}

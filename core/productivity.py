@@ -115,7 +115,7 @@ def add_todo(task: str) -> str:
         todos = _load_todos()
         todos.append(task)
         _save_todos(todos)
-        return f"Task added: {task}"
+        return f"Done. Task has been added successfully: {task}"
     except Exception as e:
         logger.error(f"Add todo error: {e}", exc_info=True)
         return "Sorry, could not add that task"
@@ -140,7 +140,7 @@ def clear_todos() -> str:
     """Clear all tasks from the to-do list."""
     try:
         _save_todos([])
-        return "All tasks cleared"
+        return "Done. All tasks have been cleared successfully."
     except Exception as e:
         logger.error(f"Clear todos error: {e}", exc_info=True)
         return "Sorry, could not clear tasks"
@@ -210,7 +210,7 @@ def set_reminder(text: str, minutes: int = None, speak_fn: callable = None) -> s
             timer.daemon = True
             timer.start()
 
-        return f"Reminder set for {minutes} minute{'s' if minutes != 1 else ''}: {reminder_text}"
+        return f"Done. Reminder set successfully for {minutes} minute{'s' if minutes != 1 else ''}: {reminder_text}"
 
     except Exception as e:
         logger.error(f"Set reminder error: {e}", exc_info=True)

@@ -121,7 +121,7 @@ def open_task_manager() -> str:
             except FileNotFoundError:
                 subprocess.Popen(["xterm", "-e", "htop"])
 
-        return "Opening task manager"
+        return "Done. Task manager has been opened successfully."
     except Exception as e:
         logger.error(f"Task manager error: {e}", exc_info=True)
         return "Could not open task manager"

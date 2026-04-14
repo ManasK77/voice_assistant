@@ -22,7 +22,7 @@ def create_file(filename: str, content: str = "", directory: str = DEFAULT_DIR) 
         with open(path, "w", encoding="utf-8") as f:
             f.write(content)
 
-        return f"File {filename} created at {path}"
+        return f"Done. File {filename} has been created successfully."
 
     except PermissionError:
         logger.warning(f"Permission denied creating {filename}")
@@ -84,7 +84,7 @@ def delete_file(filename: str, directory: str = DEFAULT_DIR) -> str:
             return f"File {filename} not found"
 
         os.remove(path)
-        return f"File {filename} deleted"
+        return f"Done. File {filename} has been deleted successfully."
 
     except PermissionError:
         logger.warning(f"Permission denied deleting {filename}")
@@ -126,7 +126,7 @@ def create_folder(folder_name: str, parent: str = DEFAULT_DIR) -> str:
     try:
         path = os.path.join(parent, folder_name)
         os.makedirs(path, exist_ok=True)
-        return f"Folder {folder_name} created"
+        return f"Done. Folder {folder_name} has been created successfully."
     except PermissionError:
         logger.warning(f"Permission denied creating folder {folder_name}")
         return f"Permission denied. Could not create folder {folder_name}"

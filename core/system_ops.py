@@ -31,8 +31,12 @@ else:
 
 def _get_volume_interface():
     """Get the Windows audio endpoint volume interface via pycaw."""
-    devices = AudioUtilities.GetSpeakers()
-    interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+    speakers = AudioUtilities.GetSpeakers()
+    # Newer pycaw versions return an AudioDevice wrapper with EndpointVolume
+    if hasattr(speakers, 'EndpointVolume'):
+        return speakers.EndpointVolume
+    # Fallback for older pycaw versions using raw COM device
+    interface = speakers.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
     return cast(interface, POINTER(IAudioEndpointVolume))
 
 
@@ -55,7 +59,7 @@ def volume_up(step: int = 10) -> str:
                 ["amixer", "-D", "pulse", "sset", "Master", f"{step}%+"],
                 check=True,
             )
-        return "Volume increased"
+        return "Done. Volume has been increased successfully."
     except Exception as e:
         logger.error(f"Volume up error: {e}", exc_info=True)
         return "Could not increase volume"
@@ -80,7 +84,7 @@ def volume_down(step: int = 10) -> str:
                 ["amixer", "-D", "pulse", "sset", "Master", f"{step}%-"],
                 check=True,
             )
-        return "Volume decreased"
+        return "Done. Volume has been decreased successfully."
     except Exception as e:
         logger.error(f"Volume down error: {e}", exc_info=True)
         return "Could not decrease volume"
@@ -103,7 +107,7 @@ def mute() -> str:
                 ["amixer", "-D", "pulse", "sset", "Master", "toggle"],
                 check=True,
             )
-        return "System muted"
+        return "Done. System has been muted successfully."
     except Exception as e:
         logger.error(f"Mute error: {e}", exc_info=True)
         return "Could not toggle mute"
@@ -119,7 +123,7 @@ def brightness_up(step: int = 10) -> str:
             current = current[0]
         new_level = min(current + step, 100)
         sbc.set_brightness(new_level)
-        return f"Brightness increased to {new_level}%"
+        return f"Done. Brightness increased to {new_level}% successfully."
     except Exception as e:
         logger.warning(f"Brightness up error: {e}")
         return "Could not increase brightness"
@@ -135,7 +139,7 @@ def brightness_down(step: int = 10) -> str:
             current = current[0]
         new_level = max(current - step, 0)
         sbc.set_brightness(new_level)
-        return f"Brightness decreased to {new_level}%"
+        return f"Done. Brightness decreased to {new_level}% successfully."
     except Exception as e:
         logger.warning(f"Brightness down error: {e}")
         return "Could not decrease brightness"
@@ -202,13 +206,13 @@ def open_app(app_name: str) -> str:
         if app_name_lower in WEBSITE_MAP:
             url = WEBSITE_MAP[app_name_lower]
             webbrowser.open(url)
-            return f"Opening {app_name} in Chrome"
+            return f"Done. {app_name} has been opened in Chrome successfully."
 
         # Check if it looks like a URL
         if _is_website(app_name_lower):
             url = app_name_lower if app_name_lower.startswith("http") else f"https://www.{app_name_lower}"
             webbrowser.open(url)
-            return f"Opening {app_name} in Chrome"
+            return f"Done. {app_name} has been opened in Chrome successfully."
 
         # --- Otherwise try as a desktop app ---
         matched_key = None
@@ -235,7 +239,7 @@ def open_app(app_name: str) -> str:
         else:
             subprocess.Popen(command.split())
 
-        return f"Opening {app_name}"
+        return f"Done. {app_name} has been opened successfully."
 
     except Exception as e:
         logger.error(f"Open app error: {e}", exc_info=True)
@@ -258,7 +262,7 @@ def close_app(app_name: str) -> str:
                 continue
 
         if killed:
-            return f"Closed {app_name}"
+            return f"Done. {app_name} has been closed successfully."
         else:
             return f"No running process found for {app_name}"
 

@@ -46,7 +46,7 @@ def capture_photo(filename: str = None) -> str:
         cap.release()
         cv2.destroyAllWindows()
 
-        return f"Photo saved as {filename}"
+        return f"Done. Photo has been captured and saved as {filename} successfully."
 
     except Exception as e:
         logger.error(f"Camera capture error: {e}", exc_info=True)

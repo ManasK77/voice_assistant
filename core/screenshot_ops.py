@@ -34,7 +34,7 @@ def take_screenshot(filename: str = None) -> str:
         save_path = os.path.join(SCREENSHOTS_DIR, filename)
         screenshot.save(save_path)
 
-        return f"Screenshot saved as {filename}"
+        return f"Done. Screenshot has been captured and saved as {filename} successfully."
 
     except Exception as e:
         logger.error(f"Screenshot error: {e}", exc_info=True)

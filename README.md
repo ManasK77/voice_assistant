@@ -1015,7 +1015,7 @@ Run through these after initial build:
 - [ ] "List files" → list of files spoken
 - [ ] "Take a photo" → photo saved in photos/ folder
 - [ ] "Take a screenshot" → screenshot saved in data/screenshots/
-- [ ] "Read the screen" → visible text spoken
+- [ ] "Read screen" → visible text spoken
 - [ ] "CPU usage" → percentage spoken
 - [ ] "System status" → combined summary spoken
 - [ ] "Calculate 10 times 10" → "The answer is 100" spoken

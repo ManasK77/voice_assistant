@@ -100,7 +100,7 @@ def web_search(query: str) -> str:
     try:
         url = f"https://www.google.com/search?q={query}"
         webbrowser.open(url)
-        return f"Searching Google for {query}"
+        return f"Done. Searching Google for {query} successfully."
     except Exception as e:
         logger.error(f"Web search error: {e}", exc_info=True)
         return "Sorry, I couldn't open the browser for searching"

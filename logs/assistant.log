@@ -11162,3 +11162,111 @@ pytesseract.pytesseract.TesseractNotFoundError: tesseract is not installed or it
 2026-04-14 21:10:03,563 [VoiceAssist] INFO: Heard: 'stop'
 2026-04-14 21:10:03,563 [VoiceAssist.IntentEngine] INFO: Detected intent: stop (keyword='stop')
 2026-04-14 21:10:03,564 [VoiceAssist.VoiceIO] INFO: Speaking: Goodbye!
+2026-04-14 21:32:01,321 [VoiceAssist.VoiceIO] INFO: Speaking: Hello! I am VoiceAssist. How can I help you?
+2026-04-14 21:32:10,057 [VoiceAssist.VoiceIO] INFO: Heard: 'read screen'
+2026-04-14 21:32:23,558 [VoiceAssist.VoiceIO] INFO: Heard: 'friday read screen'
+2026-04-14 21:32:23,558 [VoiceAssist] INFO: Heard: 'read screen'
+2026-04-14 21:32:23,559 [VoiceAssist.IntentEngine] INFO: Detected intent: read_screen (keyword='read screen')
+2026-04-14 21:32:24,918 [VoiceAssist.ScreenshotOps] INFO: OCR extracted 303 characters from screen
+2026-04-14 21:32:24,919 [VoiceAssist.VoiceIO] INFO: Speaking: The screen shows: A File Edit Selection View Go Run Terminal Help voice - Antigravity - README.md Open Agent Manage 08 OD OO 16 & v= a x
+
+fi) Explorer +++ @& system_status.py ® screenshot_ops.py M ® camera _skillpy ® file_ops.py ® system_ops.py ms READMEmd X (3 [] ¢ + = _ Fixing Screen OCR Functionality + © -- X
+wean...
+2026-04-14 21:45:51,580 [VoiceAssist.VoiceIO] INFO: Speaking: Hello! I am VoiceAssist. How can I help you?
+2026-04-14 21:46:04,753 [VoiceAssist.VoiceIO] INFO: Heard: 'friday read screen'
+2026-04-14 21:46:04,754 [VoiceAssist] INFO: Heard: 'read screen'
+2026-04-14 21:46:04,754 [VoiceAssist.IntentEngine] INFO: Detected intent: read_screen (keyword='read screen')
+2026-04-14 21:46:08,361 [VoiceAssist.ScreenshotOps] INFO: OCR extracted 303 characters from screen
+2026-04-14 21:46:08,362 [VoiceAssist] INFO: CMD: 'read screen' -> screenshot.read_screen_text -> 'The screen shows: A File Edit Selection View Go Run Terminal Help voice - Antigravity - README.md Open Agent Manage 08 OD OO 16 & v= a x\n\nfi) Explorer +++ @& system_status.py ® screenshot_ops.py M @ camera_skillpy ® file_ops.py @ system_ops.py ms READMEmd X (3 [] ¢ + -~ _ Fixing Screen OCR Functionality + © - xX\nServ...'
+2026-04-14 21:46:08,362 [VoiceAssist] ERROR: Error routing command: main.<locals>.speak_with_gui() got an unexpected keyword argument 'blocking'
+Traceback (most recent call last):
+  File "C:\Users\Manas\Desktop\voice\main.py", line 152, in route_command
+    _speak_interruptible(voice, response)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manas\Desktop\voice\main.py", line 169, in _speak_interruptible
+    voice.speak(text, blocking=False)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+TypeError: main.<locals>.speak_with_gui() got an unexpected keyword argument 'blocking'
+2026-04-14 21:46:08,363 [VoiceAssist.VoiceIO] INFO: Speaking: Something went wrong. Please try again.
+2026-04-14 21:46:16,652 [VoiceAssist.VoiceIO] INFO: Heard: 'friday read screen'
+2026-04-14 21:46:16,652 [VoiceAssist] INFO: Heard: 'read screen'
+2026-04-14 21:46:16,652 [VoiceAssist.IntentEngine] INFO: Detected intent: read_screen (keyword='read screen')
+2026-04-14 21:46:18,103 [VoiceAssist.ScreenshotOps] INFO: OCR extracted 303 characters from screen
+2026-04-14 21:46:18,103 [VoiceAssist] INFO: CMD: 'read screen' -> screenshot.read_screen_text -> 'The screen shows: A File Edit Selection View Go Run Terminal Help voice - Antigravity - README.md Open Agent Manage 08 OD OO 16 & v= a x\n\nfi) Explorer +++ @& system_status.py ® screenshot_ops.py M @ camera_skillpy ® file_ops.py @ system_ops.py ms READMEmd X (3 [] ¢ + -~ _ Fixing Screen OCR Functionality + © - xX\n™s R...'
+2026-04-14 21:46:18,104 [VoiceAssist] ERROR: Error routing command: main.<locals>.speak_with_gui() got an unexpected keyword argument 'blocking'
+Traceback (most recent call last):
+  File "C:\Users\Manas\Desktop\voice\main.py", line 152, in route_command
+    _speak_interruptible(voice, response)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manas\Desktop\voice\main.py", line 169, in _speak_interruptible
+    voice.speak(text, blocking=False)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+TypeError: main.<locals>.speak_with_gui() got an unexpected keyword argument 'blocking'
+2026-04-14 21:46:18,104 [VoiceAssist.VoiceIO] INFO: Speaking: Something went wrong. Please try again.
+2026-04-14 21:46:35,745 [VoiceAssist.VoiceIO] INFO: Heard: 'add stop'
+2026-04-14 21:46:41,487 [VoiceAssist.VoiceIO] INFO: Heard: 'friday stop'
+2026-04-14 21:46:41,488 [VoiceAssist] INFO: Heard: 'stop'
+2026-04-14 21:46:41,488 [VoiceAssist.IntentEngine] INFO: Detected intent: stop (keyword='stop')
+2026-04-14 21:46:41,489 [VoiceAssist.VoiceIO] INFO: Speaking: Goodbye!
+2026-04-14 22:22:35,628 [VoiceAssist.VoiceIO] INFO: Speaking: Hello! I am VoiceAssist. How can I help you?
+2026-04-14 22:22:44,646 [VoiceAssist.VoiceIO] INFO: Heard: 'friday read screen'
+2026-04-14 22:22:44,647 [VoiceAssist] INFO: Heard: 'read screen'
+2026-04-14 22:22:44,647 [VoiceAssist.IntentEngine] INFO: Detected intent: read_screen (keyword='read screen')
+2026-04-14 22:22:45,786 [VoiceAssist.ScreenshotOps] INFO: OCR extracted 303 characters from screen
+2026-04-14 22:22:45,787 [VoiceAssist] INFO: CMD: 'read screen' -> screenshot.read_screen_text -> 'The screen shows: A File Edit Selection View Go Run Terminal Help voice - Antigravity - README.md Open Agent Manage 08 OD OO 16 & v= a x\n\n% go\n\nVoiceAssist\n\n® Information\n\n® Information\n\n1_ops, ms READMEmd X (3 [] ¢ + -~ _ Fixing Screen OCR Functionality + © - xX\n\nGUI Mode @ Ready ? Help\n\n[YOU] friday read screen\n[Vo...'
+2026-04-14 22:22:45,787 [VoiceAssist.VoiceIO] INFO: Speaking: The screen shows: A File Edit Selection View Go Run Terminal Help voice - Antigravity - README.md Open Agent Manage 08 OD OO 16 & v= a x
+
+% go
+
+VoiceAssist
+
+® Information
+
+® Information
+
+1_ops, ms READMEmd X (3 [] ¢ + -~ _ Fixing Screen OCR Functionality + © - xX
+
+GUI Mode @ Ready ? Help
+
+[YOU] friday read screen
+[Vo...
+2026-04-14 22:22:53,507 [VoiceAssist.VoiceIO] INFO: Heard: 'friday stop talking'
+2026-04-14 22:22:53,507 [VoiceAssist.VoiceIO] INFO: Stopping TTS playback
+2026-04-14 22:22:53,629 [VoiceAssist] INFO: TTS interrupted by user: 'stop talking'
+2026-04-14 22:23:40,843 [VoiceAssist.VoiceIO] INFO: Heard: 'friday search for albert'
+2026-04-14 22:23:40,844 [VoiceAssist] INFO: Heard: 'search for albert'
+2026-04-14 22:23:40,844 [VoiceAssist.IntentEngine] INFO: Detected intent: search (keyword='search for')
+2026-04-14 22:23:40,857 [VoiceAssist] INFO: CMD: 'search for albert' -> info.web_search -> 'Done. Searching Google for albert successfully.'
+2026-04-14 22:23:40,858 [VoiceAssist.VoiceIO] INFO: Speaking: Done. Searching Google for albert successfully.
+2026-04-14 22:23:55,318 [VoiceAssist.VoiceIO] INFO: Heard: 'friday stop'
+2026-04-14 22:23:55,318 [VoiceAssist] INFO: Heard: 'stop'
+2026-04-14 22:23:55,319 [VoiceAssist.IntentEngine] INFO: Detected intent: stop (keyword='stop')
+2026-04-14 22:23:55,319 [VoiceAssist.VoiceIO] INFO: Speaking: Goodbye!
+2026-04-14 22:37:16,249 [VoiceAssist.VoiceIO] INFO: Speaking: Hello! I am VoiceAssist. How can I help you?
+2026-04-14 22:37:29,490 [VoiceAssist.VoiceIO] INFO: Heard: 'friday search jeffrey abse'
+2026-04-14 22:37:29,490 [VoiceAssist] INFO: Heard: 'search jeffrey abse'
+2026-04-14 22:37:29,491 [VoiceAssist.IntentEngine] INFO: Detected intent: search (keyword='search')
+2026-04-14 22:37:29,530 [VoiceAssist] INFO: CMD: 'search jeffrey abse' -> info.web_search -> 'Done. Searching Google for jeffrey abse successfully.'
+2026-04-14 22:37:29,531 [VoiceAssist.VoiceIO] INFO: Speaking: Done. Searching Google for jeffrey abse successfully.
+2026-04-14 22:37:42,704 [VoiceAssist.VoiceIO] INFO: Heard: 'friday search jeffrey epstein'
+2026-04-14 22:37:42,705 [VoiceAssist] INFO: Heard: 'search jeffrey epstein'
+2026-04-14 22:37:42,705 [VoiceAssist.IntentEngine] INFO: Detected intent: search (keyword='search')
+2026-04-14 22:37:42,716 [VoiceAssist] INFO: CMD: 'search jeffrey epstein' -> info.web_search -> 'Done. Searching Google for jeffrey epstein successfully.'
+2026-04-14 22:37:42,717 [VoiceAssist.VoiceIO] INFO: Speaking: Done. Searching Google for jeffrey epstein successfully.
+2026-04-14 22:38:11,167 [VoiceAssist.VoiceIO] INFO: Heard: 'friday search for harry potter and the chamber of secrets'
+2026-04-14 22:38:11,167 [VoiceAssist] INFO: Heard: 'search for harry potter and the chamber of secrets'
+2026-04-14 22:38:11,167 [VoiceAssist.IntentEngine] INFO: Detected intent: search (keyword='search for')
+2026-04-14 22:38:11,178 [VoiceAssist] INFO: CMD: 'search for harry potter and the chamber of secrets' -> info.web_search -> 'Done. Searching Google for harry potter and the chamber of secrets successfully.'
+2026-04-14 22:38:11,179 [VoiceAssist.VoiceIO] INFO: Speaking: Done. Searching Google for harry potter and the chamber of secrets successfully.
+2026-04-14 22:38:27,129 [VoiceAssist.VoiceIO] INFO: Heard: 'friday put the volume up'
+2026-04-14 22:38:27,130 [VoiceAssist] INFO: Heard: 'put the volume up'
+2026-04-14 22:38:27,130 [VoiceAssist.IntentEngine] INFO: Detected intent: volume_up (keyword='volume up')
+2026-04-14 22:38:27,150 [VoiceAssist] INFO: CMD: 'put the volume up' -> system.volume_up -> 'Done. Volume has been increased successfully.'
+2026-04-14 22:38:27,150 [VoiceAssist.VoiceIO] INFO: Speaking: Done. Volume has been increased successfully.
+2026-04-14 22:38:44,678 [VoiceAssist.VoiceIO] INFO: Heard: 'friday increase volume'
+2026-04-14 22:38:44,679 [VoiceAssist] INFO: Heard: 'increase volume'
+2026-04-14 22:38:44,679 [VoiceAssist.IntentEngine] INFO: Detected intent: volume_up (keyword='increase volume')
+2026-04-14 22:38:44,696 [VoiceAssist] INFO: CMD: 'increase volume' -> system.volume_up -> 'Done. Volume has been increased successfully.'
+2026-04-14 22:38:44,696 [VoiceAssist.VoiceIO] INFO: Speaking: Done. Volume has been increased successfully.
+2026-04-14 22:43:13,134 [VoiceAssist.VoiceIO] INFO: Speaking: Hello! I am VoiceAssist. How can I help you?
+2026-04-14 22:43:56,998 [VoiceAssist.ScreenshotOps] INFO: OCR extracted 303 characters from screen

@@ -38,6 +38,7 @@ INTENT_MAP = {
     "show_todos":     {"keywords": ["show tasks", "show my task", "my tasks", "my task", "to-do list", "what are my tasks"],"module": "productivity","action": "show_todos"},
     "clear_todos":    {"keywords": ["clear tasks", "delete all tasks"],                          "module": "productivity","action": "clear_todos"},
     "set_reminder":   {"keywords": ["remind me", "set reminder", "set an alarm"],                "module": "productivity","action": "set_reminder"},
+    "stop_speaking":  {"keywords": ["stop talking", "stop speaking", "shut up", "be quiet", "stop reading", "enough", "silence please", "stop it"],  "module": "core",  "action": "stop_speaking"},
     "stop":           {"keywords": ["stop", "quit", "goodbye", "exit", "bye"],                   "module": "core",        "action": "stop"},
 }
 

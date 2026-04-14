@@ -54,7 +54,12 @@ def route_command(intent: dict, voice: VoiceIO) -> None:
     response = None
 
     try:
-        if module == "core" and action == "stop":
+        if module == "core" and action == "stop_speaking":
+            voice.stop_speaking()
+            logger.info("CMD: %r -> core.stop_speaking -> (speech interrupted)", raw)
+            return
+
+        elif module == "core" and action == "stop":
             voice.speak("Goodbye!")
             raise SystemExit
 
@@ -143,8 +148,8 @@ def route_command(intent: dict, voice: VoiceIO) -> None:
             response = "I didn't understand that command. Please try again."
 
         if response:
-            voice.speak(response)
             logger.info(f"CMD: {raw!r} -> {module}.{action} -> {response!r}")
+            _speak_interruptible(voice, response)
 
     except SystemExit:
         raise
@@ -153,9 +158,50 @@ def route_command(intent: dict, voice: VoiceIO) -> None:
         voice.speak("Something went wrong. Please try again.")
 
 
+def _speak_interruptible(voice: VoiceIO, text: str) -> None:
+    """Speak text while listening for a 'stop speaking' interrupt.
+
+    Starts TTS in non-blocking mode, then polls the microphone for a
+    stop command.  If the user says 'stop talking', 'shut up', etc.,
+    TTS is killed immediately.
+    """
+    # Start speaking in background
+    voice.speak(text, blocking=False)
+
+    # While TTS is active, keep listening for an interrupt command
+    while voice.is_speaking:
+        try:
+            heard = voice.listen()
+        except Exception:
+            heard = None
+
+        if heard is None:
+            continue
+
+        # Check for wake-word prefix
+        if config.WAKE_WORD and config.WAKE_WORD not in heard:
+            continue
+        if config.WAKE_WORD:
+            heard = heard.replace(config.WAKE_WORD, "").strip()
+
+        # Check if this is a stop-speaking command
+        stop_phrases = [
+            "stop talking", "stop speaking", "shut up", "be quiet",
+            "stop reading", "enough", "silence please", "stop it",
+        ]
+        if any(phrase in heard.lower() for phrase in stop_phrases):
+            voice.stop_speaking()
+            logger.info("TTS interrupted by user: %r", heard)
+            break
+
+
 # --- Voice Loop ---
 def voice_loop(voice: VoiceIO):
-    """Continuous voice listening loop."""
+    """Continuous voice listening loop.
+
+    The loop listens even while the assistant is speaking, so the user
+    can say "stop talking" / "shut up" to interrupt long TTS output.
+    """
     voice.speak(f"Hello! I am {config.ASSISTANT_NAME}. How can I help you?")
 
     while True:
@@ -173,6 +219,14 @@ def voice_loop(voice: VoiceIO):
 
             logger.info(f"Heard: {text!r}")
             intent = intent_engine.detect(text)
+
+            # If the assistant is currently speaking and user wants it to stop,
+            # handle immediately without waiting for TTS to finish
+            if voice.is_speaking and intent["action"] == "stop_speaking":
+                voice.stop_speaking()
+                logger.info("CMD: %r -> core.stop_speaking -> (speech interrupted)", text)
+                continue
+
             route_command(intent, voice)
 
             # Check pending reminders
@@ -233,8 +287,8 @@ def main():
         # Wire voice events to GUI log
         original_speak = voice.speak
 
-        def speak_with_gui(text):
-            original_speak(text)
+        def speak_with_gui(text, **kwargs):
+            original_speak(text, **kwargs)
             gui.log_external(f"[ASSISTANT] {text}", "info")
 
         voice.speak = speak_with_gui

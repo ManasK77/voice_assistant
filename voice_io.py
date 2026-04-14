@@ -1,10 +1,16 @@
 # voice_io.py
 """
 VoiceIO — Speech recognition and text-to-speech wrapper.
+
+Supports interruptible TTS: speech runs in a background thread so the
+main voice-loop can keep listening for "stop" / "shut up" commands.
 """
 
+import ctypes
 import logging
+import threading
 import time
+
 import speech_recognition as sr
 import pyttsx3
 
@@ -20,7 +26,16 @@ class VoiceIO:
         self.recognizer.energy_threshold = config.SR_ENERGY_THRESHOLD
         self.recognizer.pause_threshold = config.SR_PAUSE_THRESHOLD
 
-    def _create_engine(self):
+        # TTS state
+        self._tts_thread: threading.Thread | None = None
+        self._tts_engine: pyttsx3.Engine | None = None
+        self._tts_lock = threading.Lock()
+        self._stop_event = threading.Event()
+
+    # ------------------------------------------------------------------
+    # TTS helpers
+    # ------------------------------------------------------------------
+    def _create_engine(self) -> pyttsx3.Engine:
         """Create a fresh pyttsx3 engine instance with configured settings.
 
         pyttsx3 on Windows (sapi5) has a known issue where runAndWait()
@@ -36,27 +51,112 @@ class VoiceIO:
             engine.setProperty("voice", voices[config.TTS_VOICE_INDEX].id)
         return engine
 
-    def speak(self, text: str) -> None:
-        """Speak the given text using TTS and print to console."""
+    def _tts_worker(self, text: str) -> None:
+        """Background worker that runs TTS to completion (or until stopped)."""
+        try:
+            engine = self._create_engine()
+            with self._tts_lock:
+                self._tts_engine = engine
+
+            engine.say(text)
+            engine.runAndWait()
+        except RuntimeError:
+            # engine.stop() was called from another thread — this is expected
+            pass
+        except Exception as e:
+            logger.warning(f"TTS worker error: {e}")
+        finally:
+            with self._tts_lock:
+                try:
+                    if self._tts_engine is not None:
+                        self._tts_engine.stop()
+                except Exception:
+                    pass
+                self._tts_engine = None
+            self._stop_event.clear()
+
+    # ------------------------------------------------------------------
+    # Public API
+    # ------------------------------------------------------------------
+    @property
+    def is_speaking(self) -> bool:
+        """Return True if TTS is currently active."""
+        return self._tts_thread is not None and self._tts_thread.is_alive()
+
+    def speak(self, text: str, blocking: bool = True) -> None:
+        """Speak the given text using TTS.
+
+        Args:
+            text: The text to speak.
+            blocking: If True (default), wait for speech to finish.
+                      If False, return immediately while speech plays
+                      in the background (can be interrupted via stop_speaking).
+        """
         print(f"[ASSISTANT] {text}")
         logger.info(f"Speaking: {text}")
 
-        try:
-            engine = self._create_engine()
-            engine.say(text)
-            engine.runAndWait()
-            engine.stop()
-        except Exception as e:
-            logger.warning(f"TTS error: {e}")
-            # Last-resort fallback: try once more with a fresh engine
-            try:
-                engine = pyttsx3.init()
-                engine.say(text)
-                engine.runAndWait()
-                engine.stop()
-            except Exception as e2:
-                logger.error(f"TTS fallback also failed: {e2}")
+        # If already speaking, stop the current utterance first
+        if self.is_speaking:
+            self.stop_speaking()
 
+        self._stop_event.clear()
+        self._tts_thread = threading.Thread(
+            target=self._tts_worker, args=(text,), daemon=True,
+        )
+        self._tts_thread.start()
+
+        if blocking:
+            self._tts_thread.join()
+
+    def stop_speaking(self) -> None:
+        """Interrupt any current TTS playback immediately."""
+        if not self.is_speaking:
+            return
+
+        logger.info("Stopping TTS playback")
+        self._stop_event.set()
+
+        with self._tts_lock:
+            if self._tts_engine is not None:
+                try:
+                    self._tts_engine.stop()
+                except Exception as e:
+                    logger.debug(f"engine.stop() raised: {e}")
+
+        # Give the thread a moment to exit cleanly
+        if self._tts_thread is not None:
+            self._tts_thread.join(timeout=1.0)
+
+            # If the thread is still alive (pyttsx3+sapi5 can hang), force-kill it
+            if self._tts_thread.is_alive():
+                logger.warning("TTS thread did not exit cleanly; forcing termination")
+                self._force_kill_thread(self._tts_thread)
+
+        self._tts_thread = None
+        with self._tts_lock:
+            self._tts_engine = None
+
+    @staticmethod
+    def _force_kill_thread(thread: threading.Thread) -> None:
+        """Last-resort: raise SystemExit in the target thread (Windows CPython)."""
+        try:
+            tid = thread.ident
+            if tid is None:
+                return
+            res = ctypes.pythonapi.PyThreadState_SetAsyncExc(
+                ctypes.c_ulong(tid), ctypes.py_object(SystemExit),
+            )
+            if res == 0:
+                logger.debug("Thread already exited")
+            elif res > 1:
+                # Something went wrong — revert
+                ctypes.pythonapi.PyThreadState_SetAsyncExc(ctypes.c_ulong(tid), None)
+        except Exception as e:
+            logger.debug(f"Force-kill failed: {e}")
+
+    # ------------------------------------------------------------------
+    # Listening
+    # ------------------------------------------------------------------
     def listen(self) -> str | None:
         """Listen for a voice command and return the recognized text."""
         try:

@@ -98,7 +98,9 @@ def wikipedia_summary(query: str) -> str:
 def web_search(query: str) -> str:
     """Open Google search in the default browser."""
     try:
-        url = f"https://www.google.com/search?q={query}"
+        from urllib.parse import quote_plus
+        encoded = quote_plus(query)
+        url = f"https://www.google.com/search?q={encoded}"
         webbrowser.open(url)
         return f"Done. Searching Google for {query} successfully."
     except Exception as e:
